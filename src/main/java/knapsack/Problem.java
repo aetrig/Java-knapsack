@@ -1,6 +1,8 @@
 package knapsack;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Problem {
 	int itemCount;
@@ -22,18 +24,28 @@ public class Problem {
 		}
 	}
 
-	public void printItems() {
-		items.forEach(item -> System.out.printf("%d %d \n", item.weight, item.value));
+	public Result solve(int capacity) {
+		Result result = new Result();
+		items.sort(
+				(i1, i2) -> -1 * Double.compare((double) i1.getValue() / i1.getWeight(),
+						(double) i2.getValue() / i2.getWeight()));
+
+		int i = 0;
+		while (result.getWeightSum() < capacity && i < items.size()) {
+			if (items.get(i).weight <= capacity - result.getWeightSum()) {
+				result.addItem(items.get(i), (capacity - result.getWeightSum()) / items.get(i).weight);
+			}
+			i++;
+		}
+
+		return result;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder outBuilder = new StringBuilder();
 		items.forEach(item -> outBuilder
-				.append("w: ")
-				.append(item.weight)
-				.append(" v: ")
-				.append(item.value)
+				.append(item)
 				.append("\n"));
 
 		return outBuilder.toString();
