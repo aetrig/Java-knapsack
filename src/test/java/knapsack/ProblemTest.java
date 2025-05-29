@@ -43,7 +43,7 @@ public class ProblemTest {
 	}
 
 	@Test
-	public void allInRange() {
+	public void allInRangeTest() {
 		int lowerBound = 5;
 		int upperBound = 10;
 		Problem p = new Problem(10, 1, lowerBound, upperBound);
@@ -68,7 +68,7 @@ public class ProblemTest {
 	}
 
 	@Test
-	public void specificInstance() {
+	public void specificInstanceTest() {
 		Problem p = new Problem(10, 1, 1, 10);
 		Result result = p.solve(15);
 		Assert.assertArrayEquals(new int[] { 15, 33 }, new int[] { result.getWeightSum(), result.getValueSum() });
